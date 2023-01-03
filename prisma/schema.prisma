@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,31 +8,31 @@ datasource db {
 }
 
 model DeliveryMan {
-  id          String @id   @default(uuid())
-  username    String @unique
-  password    String
+  id         String       @id @default(uuid())
+  username   String       @unique
+  password   String
+  Deliveries Deliveries[]
 
-   @@map("deliveryman")
+  @@map("deliveryman")
 }
 
 model Clients {
-  id          String @id   @default(uuid())
-  username    String @unique
-  password    String
+  id         String       @id @default(uuid())
+  username   String       @unique
+  password   String
+  Deliveries Deliveries[]
 
   @@map("clients")
 }
 
-
 model Deliveries {
-  id             String @id   @default(uuid())
+  id             String      @id @default(uuid())
   id_client      String
-  client         Clients  @relation(fields: [id_client], references: [id])
+  client         Clients     @relation(fields: [id_client], references: [id])
   id_deliveryman String
-  deliveryman    Deliveryman  @relation(fields: [id_client], references: [id])
-  
-  item_name   String
-  created_at  DateTime @default(now())
-  end_at      DateTime @default(now())
-}
+  deliveryman    DeliveryMan @relation(fields: [id_client], references: [id])
 
+  item_name  String
+  created_at DateTime @default(now())
+  end_at     DateTime @default(now())
+}
