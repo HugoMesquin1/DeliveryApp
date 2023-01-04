@@ -29,7 +29,7 @@ export class AuthenticateClientUseCase {
 
         const passwordMatch = await compare(password, client.password)
 
-        if(!password) {
+        if(!passwordMatch) {
             throw new Error ("Username or password invalid.")
         }
         
@@ -38,6 +38,8 @@ export class AuthenticateClientUseCase {
             subject: client.id,
             expiresIn: "1d"
         })
+
+        return token
 
         
     }
