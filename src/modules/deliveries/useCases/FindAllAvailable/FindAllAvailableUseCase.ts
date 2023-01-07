@@ -7,7 +7,7 @@ export class FindAllAvailableUseCase {
             where: {
                 end_at: null,
                 id_deliveryman: null,
-            }
+            },
         })
 
         return deliveries

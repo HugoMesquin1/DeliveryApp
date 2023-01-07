@@ -1,21 +1,22 @@
 import { prisma } from "../../../../database/prismaClient"
 
 
-interface IUpdateDeliveryman {
+interface IUpdateEndDate {
     id_delivery: string
     id_deliveryman: string
 }
 
 
-export class UpdateDeliverymanUseCase{
-    async execute({id_delivery, id_deliveryman}: IUpdateDeliveryman) {
+export class UpdateEndDateUseCase{
+    async execute({id_delivery, id_deliveryman}: IUpdateEndDate) {
 
-        const result = await prisma.deliveries.update({
+        const result = await prisma.deliveries.updateMany({
             where: {
                 id: id_delivery,
+                id_deliveryman
             },
             data: {
-                id_deliveryman,
+                end_at: new Date(),
             },
         })
 
