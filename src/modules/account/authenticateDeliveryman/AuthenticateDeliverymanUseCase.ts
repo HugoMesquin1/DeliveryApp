@@ -11,7 +11,7 @@ interface IAuthenticateDeliveryman {
 
 export class AuthenticateDeliverymanUseCase {
     async execute ({ username, password}: IAuthenticateDeliveryman) {
-        const DeliveryMan = await prisma.DeliveryMan.findFirst({
+        const DeliveryMan = await prisma.deliveryMan.findFirst({
             where:{
                 username,
             }
@@ -28,10 +28,10 @@ export class AuthenticateDeliverymanUseCase {
         }
 
 
-        const token = sign ({username}, "dfba5bd3e74a39f06258cb753bc59d8a"), {
+        const token = sign ({username}, "dfba5bd3e74a39f06258cb753bc59d8a", {
             subject: DeliveryMan.id,
             expiresIn: "1d",
-        }
+          })
 
         return token
     }
